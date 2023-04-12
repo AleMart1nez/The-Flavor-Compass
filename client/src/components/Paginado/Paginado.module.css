@@ -1,0 +1,48 @@
+.divPag{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.ulPage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.liPageNum{
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonPageBtn{
+    background-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+    border-radius: 2px;
+    padding: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 120%;
+    font-weight: 500;
+    color: white;
+}
+.buttonPageBtn:hover {
+        color: #DCCB88;
+        background-color: #000000;
+        border-color: #DCCB88;
+    }
+    .buttonPageBtn:focus {
+        color: #DCCB88;
+        background-color: #000000;
+        border: 2px solid #DCCB88;
+    }
+    .buttonPageBtn:disabled {
+        border: 1px solid #000000;
+        background-color: #DCCB88;
+        color: rgb(0, 0, 0);
+    }
+

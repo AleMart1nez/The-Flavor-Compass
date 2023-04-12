@@ -1,0 +1,215 @@
+.createPage {
+    background-image: url("../../assets/bg.png"); 
+    position: inherit;
+    background-attachment:scrollbars;
+    background-repeat: repeat;
+    background-size: cover;
+    min-height: 200vh;
+} 
+
+.header {
+    position: absolute;
+    top: 0;
+    margin-right: 2%;
+    display: flex;
+    justify-content:flex-end;
+    margin-top: 20%;
+}
+
+    
+.createCont {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    margin-top: -5%;
+    padding: 150px 200px 200px 100px;
+}
+
+.createForm {
+    background-color: rgb(14, 14, 14);
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-left: 2%;
+    padding: 50px;
+}
+
+.createTitle {
+    color: #fdfdfd;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    font-size: 170%;
+}
+
+.formCont {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputCont {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.inputTitle {
+    display: inline-block;
+    width: 150px;
+    color: #DCCA87;
+    font-family: var(--font-base);
+    font-size: 100%;
+    font-weight: 900;
+}
+
+.inputArea {
+    color: white;
+    background-color: black;;
+    font-family: var(--font-base);
+    font-weight: 1000;
+    border: 1px solid #ffffff;
+    width: 120%;
+    height: 100%;
+    padding-left: 5%;
+}
+
+.checkboxSpan {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #ffffff;
+    font-family: var(--font-base);
+    font-size: 100%;
+    margin-bottom: 0px;
+    font-weight: 900;
+}
+
+.inputCheckbox {
+    margin-right: 0.5rem;
+    accent-color: #DCCA87;
+}
+
+.checkboxItems {
+    color: #DCCA87;
+    font-family: var(--font-base);
+    font-size: 100%;
+    font-weight: 900;
+}
+
+.errorsCont {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8%;
+    margin-bottom: 3%;
+}
+
+.inputError {
+    color: #f13817;
+    font-family: var(--font-base);
+    font-weight: 900;
+    font-size: 90%;
+    margin-left: 1%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.btnCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+.createBtn {
+    background-color: #000000;
+    border-color: #ffffff;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    font-size: 90%;
+    padding: 1% 2%;
+}
+
+.createBtn:hover {
+    color: #DCCA87;
+    background-color: #000000;
+    border-color: #DCCA87; 
+}
+
+
+@media screen and (max-width: 800px) {
+    .createPage {
+        flex-direction: column;
+    }
+
+    .header {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 60%;
+        height: auto;
+        border-radius: 0px;
+        margin-bottom: 2%;
+        padding: 5% 0px;
+    }
+
+    .backBtn {
+        margin-bottom: 5%;
+    }
+
+    .createCont {
+        width: 90%;
+        height: 100%;
+        margin-left: 3%;
+    }
+
+    .createForm {
+        width: 90%;
+        height: auto;
+    }
+  
+    .createTitle {
+        font-size: 150%;
+    }
+  
+    .inputTitle {
+        width: 40%;
+    }
+  
+    .inputArea {
+        width: 100%;
+    }
+  
+    .imageArea {
+        width: 100%;
+    }
+  
+    .checkboxSpan {
+        font-size: 80%;
+        margin-bottom: 5px;
+    }
+  
+    .errorsCont {
+        margin-top: 5%;
+        margin-bottom: 1%;
+    }
+  
+    .inputError {
+        font-size: 80%;
+    }
+  
+    .createBtn {
+        font-size: 80%;
+        padding: 2% 5%;
+        margin: 3% 0px;
+    }
+}
