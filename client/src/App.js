@@ -6,7 +6,7 @@ import RecipeDetail from "../src/components/RecipeDetail/RecipeDetail";
 import LandingPage from "../src/components/landingPage";
 import "./App.css";
 import axios from "axios";
-axios.defaults.baseURL = 'https://the-flavor-compass-production.up.railway.app/'
+axios.defaults.baseURL = 'https://the-flavor-compass-production.up.railway.app/';
 
 const App = () => (
   <div>
