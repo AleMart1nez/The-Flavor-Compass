@@ -14,7 +14,7 @@ export const FILTER_BY_DIET = "FILTER_BY_DIET";
 
 export const getRecipes = () => (dispatch) => {
   return axios
-    .get("/recipes")
+    .get("https://the-flavor-compass-production.up.railway.app/recipes")
     .then((response) => response.data)
     .then((data) => {
       dispatch({ type: GET_RECIPES, payload: data });
