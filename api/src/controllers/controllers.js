@@ -2,7 +2,6 @@ const { API_KEY } = process.env;
 const axios = require("axios");
 const { Recipe, Diet } = require("../db");
 
-// -------------------- GETTING AND MERGING DATA FROM API AND DATABASE -------------------- 
 const getDataFromApi = async () => {
     // const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
 
@@ -14,9 +13,9 @@ const getDataFromApi = async () => {
             id: recipe.id,
             name: recipe.title,
             image: recipe.image,
-            summary: recipe.summary.replace(/<[^>]*>?/g, ""),
+            summary: recipe.summary.replace(/<[^>]*>?/g, ""), //Devuelve una cadena de texto que contiene solo el texto de la descripción de la receta, sin ninguna etiqueta HTML.
             healthScore: recipe.healthScore,
-            steps: recipe.analyzedInstructions[0]?.steps.map((r) => {
+            steps: recipe.analyzedInstructions[0]?.steps.map((r) => { //es un nuevo arreglo de cadenas de texto que contiene solo los pasos de instrucción de la primera instrucción analizada de la receta.
                 return r.step
             }), // steps es un array
             diets: recipe.diets.join(", ")
@@ -25,28 +24,8 @@ const getDataFromApi = async () => {
     return dataFromApi
 };
 
-// VERSIÓN SYNC
-// const getDataFromApi = () => {
-//     return fetch("https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5")
-//       .then(response => response.json())
-//       .then(data => {
-//         return data.results.map(recipe => {
-//           return {
-//             id: recipe.id,
-//             name: recipe.title,
-//             image: recipe.image,
-//             summary: recipe.summary.replace(/<[^>]*>?/g, ""),
-//             healthScore: recipe.healthScore,
-//             steps: recipe.analyzedInstructions[0]?.steps.map((r) => {
-//               return r.step
-//             }),
-//             diets: recipe.diets.join(", ")
-//           }
-//         })
-//       })
-//   };
 
-const getDataFromDb = () => {
+const getDataFromDb = () => { // Obtiene datos de una base de datos relacionales utilizando Sequelize, y en particular busca todas las recetas y las dietas asociadas con ellas.
     const dataFromDb = Recipe.findAll({
         include: {
             model: Diet, // Incluyo al modelo Diet para asociarlo a mis recetas
@@ -59,7 +38,7 @@ const getDataFromDb = () => {
     return dataFromDb
 }; 
 
-const dataFromDb = async () => {
+const dataFromDb = async () => { //Devuelve un nuevo arreglo de objetos de receta que se ajustan al formato requerido. 
     const dataDb = await getDataFromDb()
     const recipeFromDb = dataDb.map((r) => ({
         id: r.id,
@@ -75,22 +54,22 @@ const dataFromDb = async () => {
     return recipeFromDb
 };
 
-const getAllRecipes = async () => {
+const getAllRecipes = async () => { //Se utiliza para obtener todas las recetas disponibles desde dos fuentes diferentes (API y base de datos), combinarlas en una sola lista y devolver el resultado en forma de arreglo de objetos de recetas combinados. Esto permite que se pueda acceder a todas las recetas disponibles en un solo lugar, independientemente de la fuente de origen, lo que facilita el trabajo con las recetas en otras partes del código.
     const apiRecipes = await getDataFromApi()
     const dbRecipes = await dataFromDb()
     const allRecipes = apiRecipes.concat(dbRecipes)
     return allRecipes
 };
 
-// CONTROLLERS RECIPE
-const getRecipeById = async (id) => {
+// --------------------------------------------------CONTROLADOR RECIPE--------------------------------------------------
+const getRecipeById = async (id) => { //se utiliza para buscar una receta específica por su ID en la lista de recetas combinadas obtenida de la función getAllRecipes. Esto permite que se pueda acceder a la información de una receta específica utilizando su ID, lo que facilita la búsqueda y el acceso a la información de la receta en otras partes del código.
     const allRecipes = await getAllRecipes()
     const recipeById = await allRecipes.filter((r) => r.id == id)
     if (recipeById) return recipeById
     else throw Error(`No recipe found with the ID: ${id}`)
 };
 
-const createRecipe = async (name, image, summary, healthScore, steps, diets) => {
+const createRecipe = async (name, image, summary, healthScore, steps, diets) => { // se utiliza para crear una nueva receta en la base de datos y asociarla con una o más dietas.
     if (!name || !summary || !healthScore || !steps) throw Error("Missing important information")
     const newRecipe = await Recipe.create({
         name,
@@ -104,7 +83,7 @@ const createRecipe = async (name, image, summary, healthScore, steps, diets) => 
     return newRecipe
 };
 
-// CONTROLLERS DIET
+// --------------------------------------------------CONTROLADOR DIET-------------------------------------------------------
 
 let diets = [
     { name: "Gluten Free" },
@@ -118,10 +97,10 @@ let diets = [
     { name: "Whole 30" }
 ];
 
-const getDiets = async () => {
+const getDiets = async () => { //se utiliza para obtener una lista de todas las dietas disponibles en la base de datos. 
     const allDiets = await Diet.findAll()
     if (allDiets.length > 0) return allDiets.map((diet) => diet.name)
-    else {
+    else { //Si no hay dietas disponibles, se crean y se agregan a la base de datos una lista predeterminada de dietas.
         defaultDiets = await Diet.bulkCreate(diets)
         return defaultDiets.map((diet) => diet.name)
     }

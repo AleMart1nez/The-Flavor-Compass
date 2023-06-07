@@ -84,19 +84,23 @@ const CreateRecipe = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(createRecipe(input))
-        alert("Recipe added to the recipe book")
-        setInput({
-            name: "",
-            summary: "",
-            healthScore: "",
-            steps: "",
-            image: "",
-            diets: []
-        })
-        history.push("/home")
+        const errors = validation(input, recipes)
+        if (Object.keys(errors).length === 0) {
+            dispatch(createRecipe(input))
+            alert("Recipe added to the recipe book")
+            setInput({
+                name: "",
+                summary: "",
+                healthScore: "",
+                steps: "",
+                image: "",
+                diets: []
+            })
+            history.push("/home")
+        } else {
+            setErrors(errors)
+        }
     }
-
 
     return (
         <div className={styles.createPage} id="root">

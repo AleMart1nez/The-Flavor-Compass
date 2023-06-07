@@ -1,12 +1,12 @@
 import React from "react";
-import { FooterOverlay, Newsletter } from "../../components";
+import { FooterOverlay, EndProject } from "../../components";
 import { images } from "../../constants";
 import "./Footer.css";
 
 const Footer = () => (
   <div className="app__footer section__padding" id="login">
     <FooterOverlay />
-    <Newsletter />
+    <EndProject />
 
     <div className="app__footer-links">
       <div className="app__footer-links_contact">

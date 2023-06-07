@@ -5,6 +5,8 @@ import CreateRecipe from "../src/components/CreateRecipe/CreateRecipe";
 import RecipeDetail from "../src/components/RecipeDetail/RecipeDetail";
 import LandingPage from "../src/components/landingPage";
 import "./App.css";
+import axios from "axios";
+axios.defaults.baseURL = 'http://localhost:3001/'
 
 const App = () => (
   <div>
